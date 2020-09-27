@@ -1,10 +1,26 @@
-class Prices extends React.Component {
+import { Component } from "react";
+import { IMoney } from "./types";
+
+interface IProps {
+  bpi: {
+    USD: IMoney;
+    GBP: IMoney;
+    EUR: IMoney;
+  };
+}
+
+class Prices extends Component<IProps> {
   state = {
     corruncy: "USD",
   };
 
   render() {
-    let list = "";
+    let list:
+      | React.DetailedHTMLProps<
+          React.HTMLAttributes<HTMLSpanElement>,
+          HTMLSpanElement
+        >
+      | any = [];
 
     if (this.state.corruncy === "USD") {
       list = (
@@ -37,12 +53,12 @@ class Prices extends React.Component {
         <ul className="list-group">{list}</ul>
         <br />
         <select
-          onClick={(e) => this.setState({ corruncy: e.target.value })}
+          onClick={(e: any) => this.setState({ corruncy: e.target.value })}
           className="form-control"
-            >
-                <option value="USD">USD</option>
-                <option value="GBP">GBP</option>
-                <option value="EUR">EUR</option>
+        >
+          <option value="USD">USD</option>
+          <option value="GBP">GBP</option>
+          <option value="EUR">EUR</option>
         </select>
       </div>
     );
