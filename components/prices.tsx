@@ -14,43 +14,40 @@ class Prices extends Component<IProps> {
     corruncy: "USD",
   };
 
-  render() {
-    let list:
-      | React.DetailedHTMLProps<
-          React.HTMLAttributes<HTMLSpanElement>,
-          HTMLSpanElement
-        >
-      | any = [];
-
+  destruturingAll = (): IMoney => {
     if (this.state.corruncy === "USD") {
-      list = (
-        <li className="list-group-item">
-          Bitcoin rate for {this.props.bpi.USD.description}{" "}
-          <span className="badge badge-primary">{this.props.bpi.USD.code}</span>{" "}
-          : <strong>{this.props.bpi.USD.rate}</strong>
-        </li>
-      );
+      return {
+        description: this.props.bpi.USD.description,
+        code: this.props.bpi.USD.code,
+        rate: this.props.bpi.USD.rate,
+      };
     } else if (this.state.corruncy === "GBP") {
-      list = (
-        <li className="list-group-item">
-          Bitcoin rate for {this.props.bpi.GBP.description}{" "}
-          <span className="badge badge-primary">{this.props.bpi.GBP.code}</span>{" "}
-          : <strong>{this.props.bpi.GBP.rate}</strong>
-        </li>
-      );
+      return {
+        description: this.props.bpi.GBP.description,
+        code: this.props.bpi.GBP.code,
+        rate: this.props.bpi.GBP.rate,
+      };
     } else if (this.state.corruncy === "EUR") {
-      list = (
-        <li className="list-group-item">
-          Bitcoin rate for {this.props.bpi.EUR.description}{" "}
-          <span className="badge badge-primary">{this.props.bpi.EUR.code}</span>{" "}
-          : <strong>{this.props.bpi.EUR.rate}</strong>
-        </li>
-      );
+      return {
+        description: this.props.bpi.EUR.description,
+        code: this.props.bpi.EUR.code,
+        rate: this.props.bpi.EUR.rate,
+      };
     }
+  };
+
+  render() {
+    let { description, code, rate } = this.destruturingAll();
 
     return (
       <div className="prices">
-        <ul className="list-group">{list}</ul>
+        <ul className="list-group">
+          <li className="list-group-item">
+            Bitcoin rate for {description}{" "}
+            <span className="badge badge-primary">{code}</span> :{" "}
+            <strong>{rate}</strong>
+          </li>
+        </ul>
         <br />
         <select
           onClick={(e: any) => this.setState({ corruncy: e.target.value })}
